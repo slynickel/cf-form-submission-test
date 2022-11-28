@@ -37,7 +37,7 @@ const setRSVP = (key, data) => CF_FORMDATA.put(key,data);
 	//}
 
 	try {
-		await setCache(pk,output);
+		await setRSVP(pk,output);
 	} catch (err) {
 		return new Response('Error writing submission' + err, {status: 400});
 	}
