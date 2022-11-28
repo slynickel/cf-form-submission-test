@@ -2,8 +2,8 @@
  * POST /api/submit
  */
  export async function onRequestPost({ request }) {
-	let pk = "";
-	let pretty = "";
+	let pk = {};
+	let pretty = {};
 	try {
 		let input = await request.formData();
 
@@ -25,7 +25,7 @@
 
 		if (pk === undefined) {
 			// TODO error handling
-			pk = "noemail"
+			pk = "noemail";
 		}
 
 		pretty = JSON.stringify(output, null, 2);
