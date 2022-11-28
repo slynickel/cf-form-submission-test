@@ -1,4 +1,3 @@
-const setRSVP = (key, data) => context.env.CF_FORMDATA.put(key,data);
 
 /**
  * POST /api/submit
@@ -37,7 +36,7 @@ const setRSVP = (key, data) => context.env.CF_FORMDATA.put(key,data);
 	//}
 
 	try {
-		await setRSVP(pk,output);
+		await  request.env.CF_FORMDATA.put(key,data);
 	} catch (err) {
 		return new Response('Error writing submission' + err, {status: 400});
 	}
