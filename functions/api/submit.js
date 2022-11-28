@@ -1,3 +1,5 @@
+const setRSVP = (key, data) => CF_FORMDATA.put(key,data);
+
 /**
  * POST /api/submit
  */
@@ -5,37 +7,37 @@
 	let pk;
 	let pretty;
 	// try {
-		let input = await request.formData();
+	let input = await request.formData();
 
-		// Convert FormData to JSON
-		// NOTE: Allows mutliple values per key
-		let tmp, output = {};
-		for (let [key, value] of input) {
-			tmp = output[key];
-			if (tmp === undefined) {
-				output[key] = value;
-			} else {
-				output[key] = [].concat(tmp, value);
-			}
-			tmp = output["email"];
-			if (tmp != undefined) {
-				pk = tmp
-			}
+	// Convert FormData to JSON
+	// NOTE: Allows multiple values per key
+	let tmp, output = {};
+	for (let [key, value] of input) {
+		tmp = output[key];
+		if (tmp === undefined) {
+			output[key] = value;
+		} else {
+			output[key] = [].concat(tmp, value);
 		}
-
-		if (pk === undefined) {
-			// TODO error handling
-			pk = "noemail";
+		tmp = output["email"];
+		if (tmp != undefined) {
+			pk = tmp
 		}
+	}
 
-		pretty = JSON.stringify(output, null, 2);
+	if (pk === undefined) {
+		// TODO error handling
+		pk = "noemail";
+	}
+
+	pretty = JSON.stringify(output, null, 2);
 
 	//} catch (err) {
 	//	return new Response('Error parsing JSON content', { status: 400 });
 	//}
 
 	try {
-		await CF_FORMDATA.put(pk,output);
+		await setCache(pk,output);
 	} catch (err) {
 		return new Response('Error writing submission' + err, {status: 400});
 	}
