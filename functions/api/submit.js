@@ -4,7 +4,7 @@
  export async function onRequestPost({ request }) {
 	let pk = {};
 	let pretty = {};
-	try {
+	// try {
 		let input = await request.formData();
 
 		// Convert FormData to JSON
@@ -30,9 +30,9 @@
 
 		pretty = JSON.stringify(output, null, 2);
 
-	} catch (err) {
-		return new Response('Error parsing JSON content', { status: 400 });
-	}
+	//} catch (err) {
+	//	return new Response('Error parsing JSON content', { status: 400 });
+	//}
 
 	try {
 		await CF_FORMDATA.put(pk,output);
