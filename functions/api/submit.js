@@ -2,14 +2,14 @@
  * POST /api/submit
  */
  export async function onRequestPost({ request }) {
-	let pk = {};
-	let pretty = {};
+	let pk;
+	let pretty;
 	// try {
 		let input = await request.formData();
 
 		// Convert FormData to JSON
 		// NOTE: Allows mutliple values per key
-		let tmp, output, email = {};
+		let tmp, output = {};
 		for (let [key, value] of input) {
 			tmp = output[key];
 			if (tmp === undefined) {
@@ -37,7 +37,7 @@
 	try {
 		await CF_FORMDATA.put(pk,output);
 	} catch (err) {
-		return new Response('Error writing submission', {status: 400});
+		return new Response('Error writing submission' + err, {status: 400});
 	}
 
 	return new Response(pretty, {
