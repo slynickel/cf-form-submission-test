@@ -1,4 +1,4 @@
-const setRSVP = (key, data) => CF_FORMDATA.put(key,data);
+const setRSVP = (key, data) => context.env.CF_FORMDATA.put(key,data);
 
 /**
  * POST /api/submit
